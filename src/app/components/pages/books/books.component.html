@@ -1,24 +1,17 @@
 <section class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
     <div class="flex flex-wrap -m-4 justify-center">
-      <div class="lg:w-1/4 md:w-1/2 p-4 w-2/3">
-        <a class="relative h-60 rounded overflow-hidden  flex items-center justify-center">
-          <img alt="ecommerce" class="object-cover object-center h-full block" src="/images/ender-games.jpg">
+      @for (book of data; track $index){
+        <div class="lg:w-1/4 md:w-1/2 p-4 w-2/3">
+        <a class="relative h-60 rounded overflow-hidden flex items-center justify-center hover:cursor-pointer" routerLink="/book/{{book.bookId}}">
+          <img alt="{{book.title}}" class="object-cover object-center h-full block" src="{{book.image_url}}">
         </a>
         <div class="mt-4 justify-items-center border-2">
-          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1 text-center">CATEGORY</h3>
-          <h2 class="text-gray-900 title-font text-lg font-medium text-center">The Catalyzer</h2>
+          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1 text-center">{{book.authors.join(',')}}</h3>
+          <h2 class="text-gray-900 title-font text-lg font-medium text-center">{{book.title}}</h2>
         </div>
       </div>
-      <div class="lg:w-1/4 md:w-1/2 p-4 w-2/3">
-        <a class="relative h-60 rounded overflow-hidden  flex items-center justify-center">
-          <img alt="ecommerce" class="object-cover object-center h-full block" src="/images/foundation-design.jpg">
-        </a>
-        <div class="mt-4 justify-items-center border-2">
-          <h3 class="text-gray-500 text-xs tracking-widest title-font mb-1 text-center">CATEGORY</h3>
-          <h2 class="text-gray-900 title-font text-lg font-medium text-center">The Catalyzer</h2>
-        </div>
-      </div>
+      }
     </div>
   </div>
 </section>
