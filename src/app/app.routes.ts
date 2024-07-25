@@ -18,7 +18,7 @@ export const routes: Routes = [
         title: 'E-BookScore | Books'
       },
       {
-        path: 'books/:bookId',
+        path: 'book/:bookId',
         loadComponent: () => import('./components/pages/book-details/book-details.component').then(c =>c.BookDetailsComponent),
         title: 'E-BookScore | Book Resume'
       }
