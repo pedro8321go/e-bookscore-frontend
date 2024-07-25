@@ -25,7 +25,12 @@ export class BookDetailsComponent implements OnInit{
     this.route.params.pipe(
       switchMap(({bookId}) => this.bookService.getBookById(bookId)))
       .subscribe(resp => {
-        this.book = resp;
+        if(resp){
+          this.book = resp;
+        }
+        else {
+          this.router.navigate(['/not-found'])
+        }
       })
 
   }
