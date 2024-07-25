@@ -1,7 +1,7 @@
 import {Component, inject, OnInit} from '@angular/core';
 import {BookService} from "../../../services/book.service";
 import {Book} from "../../../interfaces/book.interface";
-import {JsonPipe} from "@angular/common";
+import {JsonPipe, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 
 @Component({
@@ -9,7 +9,8 @@ import {RouterLink} from "@angular/router";
   standalone: true,
   imports: [
     JsonPipe,
-    RouterLink
+    RouterLink,
+    NgIf
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
@@ -17,7 +18,7 @@ import {RouterLink} from "@angular/router";
 export class BooksComponent implements OnInit{
 
   public bookService = inject(BookService);
-  data!: Book[];
+  data: Book[] | undefined;
 
   ngOnInit(){
     this.getAllBooks();
@@ -28,5 +29,6 @@ export class BooksComponent implements OnInit{
       this.data = resp;
     })
   }
+
 
 }
