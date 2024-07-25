@@ -3,6 +3,7 @@ import {BookService} from "../../../services/book.service";
 import {Book} from "../../../interfaces/book.interface";
 import {JsonPipe, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
+import {FormsModule} from "@angular/forms";
 
 @Component({
   selector: 'app-books',
@@ -10,7 +11,8 @@ import {RouterLink} from "@angular/router";
   imports: [
     JsonPipe,
     RouterLink,
-    NgIf
+    NgIf,
+    FormsModule
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
@@ -18,7 +20,10 @@ import {RouterLink} from "@angular/router";
 export class BooksComponent implements OnInit{
 
   public bookService = inject(BookService);
-  data: Book[] | undefined;
+  books: Book[] = [];
+  filteredBooks: Book[] = [];
+  filterText: string = '';
+  sortBy: string = 'title';
 
   ngOnInit(){
     this.getAllBooks();
@@ -26,8 +31,31 @@ export class BooksComponent implements OnInit{
 
   getAllBooks() {
     this.bookService.getAllBooks().subscribe( resp =>{
-      this.data = resp;
+      this.books = resp;
+      this.applyFilterAndSort();
     })
+  }
+
+  applyFilterAndSort(): void {
+    this.filteredBooks = this.books
+      .filter(book => book.title.toLowerCase().includes(this.filterText) || book.editorial.toLowerCase().includes(this.filterText) || book.short_description.toLowerCase().includes(this.filterText) || book.authors.find(author => author.toLowerCase().includes(this.filterText)))
+      .sort((a, b) => {
+        if(this.sortBy == 'title') {
+          return a['title'].localeCompare(b['title'])
+        } else {
+          return a['editorial'].localeCompare(b['editorial'])
+        }
+
+      });
+  }
+
+  onFilterTextChanged() {
+    this.applyFilterAndSort();
+  }
+
+  onSortByChanged(value: string) {
+    this.sortBy = value;
+    this.applyFilterAndSort();
   }
 
 
