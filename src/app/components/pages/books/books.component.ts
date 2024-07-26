@@ -30,14 +30,25 @@ export class BooksComponent implements OnInit{
   }
 
   getAllBooks() {
-    this.bookService.getAllBooks().subscribe( resp =>{
-      this.books = resp;
-      this.applyFilterAndSort();
+    this.bookService.getAllBooks().subscribe( books =>{
+      this.filteredBooks = books
+      .filter(book => book.title.toLowerCase().includes(this.filterText) || book.editorial.toLowerCase().includes(this.filterText) || book.short_description.toLowerCase().includes(this.filterText) || book.authors.find(author => author.toLowerCase().includes(this.filterText)))
+      .sort((a, b) => {
+        if(this.sortBy == 'title') {
+          return a['title'].localeCompare(b['title'])
+        } else {
+          return a['editorial'].localeCompare(b['editorial'])
+        }
+      });
+      console.log(this.filteredBooks);
     })
   }
 
   applyFilterAndSort(): void {
-    this.filteredBooks = this.books
+    this.getAllBooks();
+    console.log(this.books);
+    if(this.filterText.length > 0) {
+      this.filteredBooks = this.books
       .filter(book => book.title.toLowerCase().includes(this.filterText) || book.editorial.toLowerCase().includes(this.filterText) || book.short_description.toLowerCase().includes(this.filterText) || book.authors.find(author => author.toLowerCase().includes(this.filterText)))
       .sort((a, b) => {
         if(this.sortBy == 'title') {
@@ -47,15 +58,17 @@ export class BooksComponent implements OnInit{
         }
 
       });
+    }
+
   }
 
   onFilterTextChanged() {
-    this.applyFilterAndSort();
+    this.getAllBooks();
   }
 
   onSortByChanged(value: string) {
     this.sortBy = value;
-    this.applyFilterAndSort();
+    this.getAllBooks();
   }
 
 
