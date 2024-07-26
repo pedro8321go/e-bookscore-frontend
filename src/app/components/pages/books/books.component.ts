@@ -66,6 +66,12 @@ export class BooksComponent implements OnInit{
     this.getAllBooks();
   }
 
+  onFilterValueChanged(filterText: string) {
+    this.filterText = filterText;
+    console.log(this.filterText);
+    this.getAllBooks();
+  }
+
   onSortByChanged(value: string) {
     this.sortBy = value;
     this.getAllBooks();
