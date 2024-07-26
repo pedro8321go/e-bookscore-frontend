@@ -46,7 +46,6 @@ export class BooksComponent implements OnInit{
 
   applyFilterAndSort(): void {
     this.getAllBooks();
-    console.log(this.books);
     if(this.filterText.length > 0) {
       this.filteredBooks = this.books
       .filter(book => book.title.toLowerCase().includes(this.filterText) || book.editorial.toLowerCase().includes(this.filterText) || book.short_description.toLowerCase().includes(this.filterText) || book.authors.find(author => author.toLowerCase().includes(this.filterText)))
@@ -62,13 +61,8 @@ export class BooksComponent implements OnInit{
 
   }
 
-  onFilterTextChanged() {
-    this.getAllBooks();
-  }
-
   onFilterValueChanged(filterText: string) {
-    this.filterText = filterText;
-    console.log(this.filterText);
+    this.filterText = filterText.toLowerCase().trim();
     this.getAllBooks();
   }
 
