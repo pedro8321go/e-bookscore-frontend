@@ -1,7 +1,10 @@
-<section *ngIf="book" class="text-gray-600 body-font overflow-hidden">
-  <div class="container px-5 py-24 mx-auto">
-    <div class="lg:w-4/5 mx-auto flex flex-wrap">
+<section class="text-gray-600 body-font overflow-hidden">
+  <ng-container *ngIf="book == undefined">
+    <app-book-resume-skeleton></app-book-resume-skeleton>
+  </ng-container>
 
+  <div *ngIf="book" class="container px-5 py-24 mx-auto">
+    <div class="lg:w-4/5 mx-auto flex flex-wrap">
       <img alt="{{book.title}}" class="lg:w-1/2 w-auto lg:h-auto h-80 object-center rounded" src="{{book.image_url}}">
       <div class="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
         <h2 class="text-sm title-font text-gray-500 tracking-widest">{{book.authors}}</h2>

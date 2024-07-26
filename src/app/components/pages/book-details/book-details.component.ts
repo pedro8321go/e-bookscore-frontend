@@ -4,6 +4,7 @@ import {BookService} from "../../../services/book.service";
 import {Book} from "../../../interfaces/book.interface";
 import {switchMap} from "rxjs";
 import {JsonPipe, NgIf} from "@angular/common";
+import {BookResumeSkeletonComponent} from "../../shared/book-resume-skeleton/book-resume-skeleton.component";
 
 
 @Component({
@@ -11,7 +12,8 @@ import {JsonPipe, NgIf} from "@angular/common";
   standalone: true,
   imports: [
     JsonPipe,
-    NgIf
+    NgIf,
+    BookResumeSkeletonComponent
   ],
   templateUrl: './book-details.component.html',
   styleUrl: './book-details.component.css'
