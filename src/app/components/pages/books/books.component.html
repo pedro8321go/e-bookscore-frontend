@@ -1,6 +1,5 @@
 <section *ngIf="filteredBooks" class="text-gray-600 body-font">
   <div class="container px-5 py-24 mx-auto">
-
     <div class="flex flex-row justify-between mb-4">
       <div class="max-w-sm mx-auto">
         <label for="sort-selection" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ordenar
@@ -31,6 +30,12 @@
       </div>
 
     </div>
+    <div *ngIf="loading" class="flex flex-wrap justify-between m-4">
+      <app-book-card-skeleton></app-book-card-skeleton>
+      <app-book-card-skeleton></app-book-card-skeleton>
+      <app-book-card-skeleton></app-book-card-skeleton>
+      <app-book-card-skeleton></app-book-card-skeleton>
+    </div>
     <div class="flex flex-wrap -m-4 justify-center">
       @for (book of filteredBooks; track $index) {
         <div class="lg:w-1/4 md:w-1/2 p-4 w-2/3">
@@ -38,7 +43,6 @@
         </div>
       }
     </div>
-
 
     <div *ngIf="filteredBooks.length == 0"
       class="flex items-center p-4 mt-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800"

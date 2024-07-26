@@ -5,6 +5,7 @@ import {JsonPipe, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
 import {BookCardComponent} from "../../shared/book-card/book-card.component";
+import {BookCardSkeletonComponent} from "../../shared/book-card-skeleton/book-card-skeleton.component";
 
 @Component({
   selector: 'app-books',
@@ -14,7 +15,8 @@ import {BookCardComponent} from "../../shared/book-card/book-card.component";
     RouterLink,
     NgIf,
     FormsModule,
-    BookCardComponent
+    BookCardComponent,
+    BookCardSkeletonComponent
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
@@ -26,6 +28,7 @@ export class BooksComponent implements OnInit{
   filteredBooks: Book[] = [];
   filterText: string = '';
   sortBy: string = 'title';
+  loading = true;
 
   ngOnInit(){
     this.getAllBooks();
@@ -43,6 +46,7 @@ export class BooksComponent implements OnInit{
         }
       });
     })
+    this.loading = false;
   }
 
   applyFilterAndSort(): void {
