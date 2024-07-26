@@ -40,7 +40,6 @@ export class BooksComponent implements OnInit{
           return a['editorial'].localeCompare(b['editorial'])
         }
       });
-      console.log(this.filteredBooks);
     })
   }
 
