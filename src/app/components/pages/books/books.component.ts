@@ -4,6 +4,7 @@ import {Book} from "../../../interfaces/book.interface";
 import {JsonPipe, NgIf} from "@angular/common";
 import {RouterLink} from "@angular/router";
 import {FormsModule} from "@angular/forms";
+import {BookCardComponent} from "../../shared/book-card/book-card.component";
 
 @Component({
   selector: 'app-books',
@@ -12,7 +13,8 @@ import {FormsModule} from "@angular/forms";
     JsonPipe,
     RouterLink,
     NgIf,
-    FormsModule
+    FormsModule,
+    BookCardComponent
   ],
   templateUrl: './books.component.html',
   styleUrl: './books.component.css'
